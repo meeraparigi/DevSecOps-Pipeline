@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../../Terraform-Best-Practice"
+		},
+		{
+			"path": "../../../Downloads/infra-problem-latest"
+		},
+		{
+			"path": "../../packer_tutorial"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
