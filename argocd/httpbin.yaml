@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://ankit20000/charts
+    repoURL: https://ankit20000.github.io/charts
     chart: ankitchart
     targetRevision: 0.1.0
     helm:
