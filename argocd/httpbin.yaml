@@ -15,7 +15,9 @@ spec:
       values: |
         replicaCount: 2 
         image:
-          repository: nginx  
+          repository: nginx
+        service:
+          type: NodePort    
 
   destination:
     server: https://kubernetes.default.svc
