@@ -13,11 +13,11 @@ spec:
     helm:
       # Only override specific values here
       values: |
-        replicaCount: 3 
+        replicaCount: 2
         image:
           repository: nginx
         service:
-          type: NodePort    
+          type: LoadBalancer    
 
   destination:
     server: https://kubernetes.default.svc
