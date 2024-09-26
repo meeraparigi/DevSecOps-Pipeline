@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/ankit20000/Helm-Argocd.git'
     targetRevision: helm_argo
-    path: manifest
+    path: argocd
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default
