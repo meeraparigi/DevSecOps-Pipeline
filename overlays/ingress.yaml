@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: caddy-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /caddy
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
@@ -16,3 +16,6 @@ spec:
                 name: caddy-service
                 port:
                   name: http  # Make sure this matches the port name in the Service
+
+
+
