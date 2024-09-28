@@ -13,7 +13,7 @@ spec:
     helm:
       # Only override specific values here
       values: |
-        replicaCount: 2
+        replicaCount: 1
         image:
           repository: nginx
         service:
