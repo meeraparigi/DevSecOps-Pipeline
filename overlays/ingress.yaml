@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: caddy-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /caddy
 spec:
   ingressClassName: nginx
   rules:
