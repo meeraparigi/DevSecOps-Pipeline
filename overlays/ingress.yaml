@@ -8,7 +8,7 @@ spec:
   ingressClassName: nginx
   rules:
   - host: localhost
-    http:
+    https:
         paths:
           - path: /caddy
             pathType: Prefix
