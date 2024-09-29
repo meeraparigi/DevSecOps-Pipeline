@@ -8,7 +8,7 @@ spec:
   ingressClassName: nginx
   rules:
   - host: localhost
-    https:
+    http:
         paths:
           - path: /caddy
             pathType: Prefix
@@ -16,7 +16,7 @@ spec:
               service:
                 name: caddy-service
                 port:
-                  name: http  # Make sure this matches the port name in the Service
+                  name: https  # Make sure this matches the port name in the Service
 
 
 
