@@ -2,10 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus
-  labels:
-    app: prometheus
+  namespace: monitor-ns
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1  # Adjust as needed
   selector:
     matchLabels:
       app: prometheus
@@ -14,28 +13,17 @@ spec:
       labels:
         app: prometheus
     spec:
+      securityContext:
+        fsGroup: 1000  # Group ID for Prometheus
       containers:
         - name: prometheus
-          image: prom/prometheus:latest
-          args:
-            - "--config.file=/etc/prometheus/prometheus.yml"
-            - "--storage.tsdb.path=/prometheus"
+          image: prom/prometheus
+          ports:
+            - containerPort: 9090
           volumeMounts:
-            - name: config-volume
-              mountPath: /etc/prometheus
-            - name: data
+            - name: prometheus-storage
               mountPath: /prometheus
-          resources:
-            requests:
-              memory: {{ .Values.prometheus.resources.requests.memory }}
-              cpu: {{ .Values.prometheus.resources.requests.cpu }}
-            limits:
-              memory: {{ .Values.prometheus.resources.limits.memory }}
-              cpu: {{ .Values.prometheus.resources.limits.cpu }}
       volumes:
-        - name: config-volume
-          configMap:
-            name: prometheus-config
-        - name: data
+        - name: prometheus-storage
           persistentVolumeClaim:
             claimName: prometheus-pvc
