@@ -7,4 +7,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: "{{ .Values.prometheus.storageSize }}"
+      storage: "10Gi"  # Wrap in quotes
