@@ -11,7 +11,9 @@ data:
       alertmanagers:
         - static_configs:
             - targets:
-                - {{ .Values.prometheus.alertingEndpoints | join(", ") }}
+                {{- range .Values.prometheus.alertingEndpoints }}
+                - "{{ . }}"
+                {{- end }}
 
     scrape_configs:
       - job_name: 'kubernetes'
