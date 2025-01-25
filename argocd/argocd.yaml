@@ -10,8 +10,9 @@ spec:
     path: manifest
     targetRevision: helm_argo
   destination:
-    server: 'https://F0E2F8224962B7004DFC3766599999E1.gr7.ap-south-1.eks.amazonaws.com'
-    namespace: argocd
+    server: 'https://kubernetes.default.svc'
+    #server: 'https://F0E2F8224962B7004DFC3766599999E1.gr7.ap-south-1.eks.amazonaws.com'
+    namespace: nginx
   syncPolicy:
      automated:
        selfHeal: true
