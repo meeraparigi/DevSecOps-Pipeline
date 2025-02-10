@@ -1,0 +1,19 @@
+# This is the test file
+name: Test
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    runs_on: java_build
+    #needs build - ensure that build is successful before running test
+    steps:
+      - name: Run Unit Tests
+        run: mvn test
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: target/test-classes/TEST-*.xml
