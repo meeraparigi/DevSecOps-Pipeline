@@ -1,0 +1,14 @@
+# Create Sonar file
+name: Sonar Scan
+
+on:
+  workflow_call:
+
+jobs:
+  sonar:
+    runs-on: java_build
+    # needs java build - ensure this runs after build is complete
+    steps:
+      - name: SonarCloud Scan
+        run: mvn sonar:sonar -Dsonar.projectKey=meeraparigi_DevSecOps-Pipeline -Dsonar.organization=meeraparigi -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=meeraparigi
+    
