@@ -10,5 +10,4 @@ jobs:
     # needs java build - ensure this runs after build is complete
     steps:
       - name: SonarCloud Scan
-        run: mvn sonar:sonar -Dsonar.projectKey=meeraparigi_DevSecOps-Pipeline -Dsonar.organization=meeraparigi -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=meeraparigi
-    
+        run: mvn sonar:sonar -Dsonar.projectKey=meeraparigi_DevSecOps-Pipeline -Dsonar.organization=meeraparigi -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
