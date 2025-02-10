@@ -6,7 +6,7 @@ on:
 
 jobs:
   sonar:
-    runs-on: ubuntu_latest
+    runs-on: ubuntu-latest
     #runs-on: java_build
     # needs java build - ensure this runs after build is complete
     steps:
