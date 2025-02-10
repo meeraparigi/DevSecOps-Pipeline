@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu_latest
+    runs-on: ubuntu-latest
     #runs-on: java_build
     #needs build - ensure that build is successful before running test
     steps:
