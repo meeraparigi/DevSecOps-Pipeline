@@ -14,11 +14,13 @@ jobs:
     steps:
       - name: Build Docker Image
         run: |
-          sudo docker build -t ${{ env.DOCKER_IMAGE }}
-          sudo docker save ${{ env.DOCKER_IMAGE }} > docker_image.tar
+          #sudo docker build -t ${{ env.DOCKER_IMAGE }}
+          #sudo docker save ${{ env.DOCKER_IMAGE }} > docker_image.tar
+          sudo docker build -t meeraparigi/petapp:latest .
+          sudo docker save meeraparigi/petapp:latest > docker_image.tar
 
       - name: Upload Docker Image Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.4.1
         with:
           name: docker_image
           path: docker_image.tar
@@ -27,6 +29,6 @@ jobs:
         run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | sudo docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
       - name: Docker Push Image
-        run: sudo docker push ${{ env.DOCKER_IMAGE }}
+        run: sudo docker push meeraparigi/petapp:latest
         
         
