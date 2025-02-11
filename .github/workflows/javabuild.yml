@@ -46,4 +46,4 @@ jobs:
 
       - name: Upload JAR to JFROG
         run: |
-          sudo jfrog rt upload "target/*.jar" "petfrog-repo/" --url="https://trialmeeraparigi.jfrog.io/artifactory/" --user=${{ secrets.JFROG_USER }} --password=${{ secrets.JFROG_PASSWORD }}
+          sudo jfrog rt upload "target/*.jar" "petfrog-repo/"
