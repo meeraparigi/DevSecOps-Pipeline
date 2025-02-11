@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: petapp
+  name: petapp-new
   namespace: argocd
 spec:
   project: default
@@ -12,7 +12,7 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
     #server: 'https://F0E2F8224962B7004DFC3766599999E1.gr7.ap-south-1.eks.amazonaws.com'
-    namespace: petapp
+    namespace: petapp-new
   syncPolicy:
      automated:
        selfHeal: true
