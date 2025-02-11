@@ -12,4 +12,4 @@ jobs:
     steps:
       - name: SonarCloud Scan
         run: mvn sonar:sonar -Dsonar.projectKey=meeraparigi_DevSecOps-Pipeline -Dsonar.organization=meeraparigi -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        working-directory: ./your-maven-project
+        working-directory: ./home/runner/work/DevSecOps-Pipeline/DevSecOps-Pipeline/target
