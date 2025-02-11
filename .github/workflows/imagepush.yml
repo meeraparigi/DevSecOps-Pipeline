@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Build Docker Image
         run: |
-          #sudo docker build -t ${{ env.DOCKER_IMAGE }}
-          #sudo docker save ${{ env.DOCKER_IMAGE }} > docker_image.tar
           sudo docker build -t meeraparigi/petapp:latest .
           sudo docker save meeraparigi/petapp:latest > docker_image.tar
 
