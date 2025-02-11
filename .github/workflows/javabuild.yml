@@ -44,6 +44,6 @@ jobs:
           JF_URL: https://trialmeeraparigi.jfrog.io
           JF_ACCESS_TOKEN: ${{ secrets.JFROG_TOKEN }}
 
-      - name: Upload JAR to JFROG
-        run: |
-          sudo jfrog rt upload "target/*.jar" "petfrog-repo/"
+      #- name: Upload JAR to JFROG
+        #run: |
+          #sudo jfrog rt upload "target/*.jar" "petfrog-repo/"
