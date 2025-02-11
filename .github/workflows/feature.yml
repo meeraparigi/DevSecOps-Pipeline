@@ -1,4 +1,4 @@
-# This is the CI Pipeline to be triggered
+# This is the CI Pipeline to be triggered on self-hosted runner java-build
 name: CI Pipeline
 on:
   push:
