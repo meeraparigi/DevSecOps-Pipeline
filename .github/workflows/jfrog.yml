@@ -1,0 +1,32 @@
+# This file contains code to upload an artifact to JFrog
+name: JFrog Upload
+
+on:
+  push:
+    branches:
+      - jfrog-test
+
+jobs:
+  upload-artifact:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up JFrog CLI
+      run:  |
+        curl -fL https://install-cli.jfrog.io | sh
+          jf --version
+          jf c add artifactory-server \
+            --url=${{ secrets.JFROG_URL }} \
+            --user=${{ secrets.JFROG_USER }} \
+            --password=${{ secrets.JFROG_PASSWORD }} \
+            --interactive=false
+
+    - name: Upload Artifact to JFrog Artifactory
+      run: jf rt u "target/*.jar" "petfrog-repo/" --build-name=petapp-build --build-number=${{ github.run_number }}
+
+    - name: Publish Build Info
+      run: jf rt bp petapp-build ${{ github.run_number }}
+
