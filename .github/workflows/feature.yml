@@ -3,7 +3,7 @@ name: CI Pipeline
 on:
   push:
     branches:
-      -  main
+      -  jfrog-test
 
 env:
   # DOCKER_IMAGE: meeraparigi/petapp:${{ github.sha }}
@@ -13,6 +13,7 @@ jobs:
   build:
     uses: ./.github/workflows/javabuild.yml
     secrets: inherit
+    
   sonar:
     uses: ./.github/workflows/sonar.yml
     needs: build
@@ -26,4 +27,9 @@ jobs:
   imagepush:
     uses: ./.github/workflows/imagepush.yml
     needs: test
+    secrets: inherit
+
+  jfrogupload:
+    uses: ./.github/workflows/jfrog.yml
+    needs: build
     secrets: inherit
