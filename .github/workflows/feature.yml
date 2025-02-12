@@ -28,8 +28,3 @@ jobs:
     uses: ./.github/workflows/imagepush.yml
     needs: test
     secrets: inherit
-
-  jfrogupload:
-    uses: ./.github/workflows/jfrog.yml
-    needs: build
-    secrets: inherit
