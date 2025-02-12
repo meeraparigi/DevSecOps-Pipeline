@@ -34,15 +34,3 @@ jobs:
         with:
           name: jar
           path: target/*.jar
-
-      # - name: Configure JFrog CLI
-        # uses: jfrog/setup-jfrog-cli@v4.5.6
-        # with:
-        #  version: latest
-        # env:
-        #  JF_URL: https://trialmeeraparigi.jfrog.io
-        #  JF_ACCESS_TOKEN: ${{ secrets.JFROG_TOKEN }}
-
-      # - name: Upload JAR to JFROG
-        # run: |
-        #  sudo jfrog rt upload "target/*.jar" "petfrog-repo-libs-release/"
