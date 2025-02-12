@@ -1,4 +1,4 @@
-# This is the CI Pipeline to be triggered on self-hosted runner java-build
+# This is the CI Pipeline to be triggered on github hosted runner
 name: CI Pipeline
 on:
   push:
