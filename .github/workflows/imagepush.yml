@@ -6,7 +6,7 @@ on:
 
 jobs:
   image_push:
-    runs-on: java-build
+    runs-on: ubuntu-latest
     #env:
       # DOCKER_IMAGE: meeraparigi/petapp:${{ github.sha }}
 
