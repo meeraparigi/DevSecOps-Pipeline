@@ -18,16 +18,19 @@ jobs:
       run: |
         curl -fL https://install-cli.jfrog.io | sh
         echo "$HOME/.jfrog/bin" >> $GITHUB_PATH
+        echo "JFrog CLI Installed at: $HOME/.jfrog/bin/jfrog"
+        ls -lah $HOME/.jfrog/bin/  # Verify JFrog CLI is present
+
+    - name: Manually Add JFrog to Path
+      run: |
+        export PATH=$HOME/.jfrog/bin:$PATH
+        echo "Updated PATH: $PATH"
 
     - name: Verify JFrog CLI Installation
-      run: jfrog --version
+      run: |
+        which jfrog || echo "JFrog CLI not found in PATH"
+        jfrog --version
         
-    - name: Ensure JFrog CLI is Executable
-      run: chmod +x $HOME/.jfrog/bin/jfrog
-
-    - name: Debug JFrog CLI Path
-      run: which jfrog || echo "JFrog CLI not found"
-
     - name: Configure JFrog CLI using secrets User and Password
       run:  |
         jfrog config add my-jfrog \
