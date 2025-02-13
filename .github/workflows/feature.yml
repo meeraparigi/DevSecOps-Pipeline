@@ -14,14 +14,14 @@ jobs:
     uses: ./.github/workflows/javabuild.yml
     secrets: inherit
     
-  sonar:
-    uses: ./.github/workflows/sonar.yml
+  jfrog:
+    uses: ./.github/workflows/jfrog.yml
     needs: build
     secrets: inherit
 
   test:
     uses: ./.github/workflows/test.yml
-    needs: sonar
+    needs: jfrog
     secrets: inherit
     
   imagepush:
