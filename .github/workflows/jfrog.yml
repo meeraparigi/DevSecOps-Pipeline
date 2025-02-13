@@ -14,18 +14,16 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Install JFrog CLI
+    - name: Manually Download and Install JFrog CLI
       run: |
-        curl -fL https://install-cli.jfrog.io | sh || { echo "JFrog CLI installation failed"; exit 1; }
-        sudo mv jfrog /usr/local/bin/  # Ensure it's moved to a system-wide location
-        sudo chmod +x /usr/local/bin/jfrog  # Ensure it has execution permission
-        echo "JFrog CLI installed successfully!"
-          
+        curl -fL https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/jfrog-cli-linux-amd64/jfrog -o jfrog
+        chmod +x jfrog
+        sudo mv jfrog /usr/local/bin/jfrog  # Move to system-wide location
+        echo "JFrog CLI installed successfully at /usr/local/bin/jfrog"
+
     - name: Verify JFrog CLI Installation
       run: |
         ls -lah /usr/local/bin/ | grep jfrog || { echo "JFrog CLI binary missing!"; exit 1; }
-        export PATH=/usr/local/bin:$PATH
-        echo "Updated PATH: $PATH"
         which jfrog || { echo "JFrog CLI not found in PATH!"; exit 1; }
         jfrog --version
         
