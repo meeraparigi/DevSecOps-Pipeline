@@ -14,11 +14,19 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Install JFrog CLI using Install Script
+    - name: Install JFrog CLI
       run: |
         curl -fL https://install-cli.jfrog.io | sh
-        chmod +x /usr/local/bin/jfrog  # Ensure it's executable
-        echo "JFrog CLI installed successfully."
+        JFROG_PATH=$(find $HOME -type f -name "jfrog" 2>/dev/null | head -n 1)
+
+        if [[ -z "$JFROG_PATH" ]]; then
+          echo "Error: JFrog CLI installation failed. Binary not found."
+          exit 1
+        fi
+
+        sudo mv "$JFROG_PATH" /usr/local/bin/jfrog
+        sudo chmod +x /usr/local/bin/jfrog
+        echo "JFrog CLI successfully installed."
 
     - name: Verify JFrog CLI Installation
       run: |
