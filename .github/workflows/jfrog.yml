@@ -17,7 +17,16 @@ jobs:
     - name: Install JFrog CLI
       run: |
         curl -fL https://install-cli.jfrog.io | sh
-        echo "$HOME/.jfrog" >> $GITHUB_PATH
+        echo "$HOME/.jfrog/bin" >> $GITHUB_PATH
+
+    - name: Verify JFrog CLI Installation
+      run: jfrog --version
+        
+    - name: Ensure JFrog CLI is Executable
+      run: chmod +x $HOME/.jfrog/bin/jfrog
+
+    - name: Debug JFrog CLI Path
+      run: which jfrog || echo "JFrog CLI not found"
 
     - name: Configure JFrog CLI using secrets User and Password
       run:  |
@@ -32,7 +41,7 @@ jobs:
         jfrog config edit my-jfrog --access-token=${{ secrets.JFROG_TOKEN }} 
 
     - name: Upload Artifact to JFrog Artifactory
-      run: jf rt u "target/*.jar" "petfrog-repo/*.jar" --build-name=petapp-build --build-number=${{ github.run_number }}
+      run: jfrog rt upload "target/*.jar" "petfrog-repo/*.jar" --build-name=petapp-build --build-number=${{ github.run_number }}
 
     - name: Publish Build Info
-      run: jf rt bp petapp-build ${{ github.run_number }}
+      run: jfrog rt bp petapp-build ${{ github.run_number }}
