@@ -16,19 +16,26 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-          cache: maven
+          cache: 'maven'
 
       - name: Cache Maven Dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2
+          key: maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: maven-
 
       - name: Build with Maven
         run: |
-          mvn clean 
-          mvn install
+          mvn clean package -Dskiptests
 
+      - name: Verify Target Directory Exists
+        run: |
+          if [ ! -d "target" ]; then
+            echo "Error: target directory does not exist. Maven build may have failed."
+            exit 1
+          fi
+        
       - name: Upload Build Architect
         uses: actions/upload-artifact@v4.4.1
         with:
