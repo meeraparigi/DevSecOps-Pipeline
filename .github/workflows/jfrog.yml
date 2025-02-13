@@ -17,12 +17,11 @@ jobs:
     - name: Install JFrog CLI using Install Script
       run: |
         curl -fL https://install-cli.jfrog.io | sh
-        sudo mv ~/.jfrog/bin/jfrog /usr/local/bin/jfrog
-        chmod +x /usr/local/bin/jfrog
+        chmod +x /usr/local/bin/jfrog  # Ensure it's executable
+        echo "JFrog CLI installed successfully."
 
     - name: Verify JFrog CLI Installation
       run: |
-        ls -lah /usr/local/bin/ | grep jfrog || { echo "JFrog CLI binary missing!"; exit 1; }
         which jfrog || { echo "JFrog CLI not found in PATH!"; exit 1; }
         jfrog --version
         
