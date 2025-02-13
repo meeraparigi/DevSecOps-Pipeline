@@ -29,6 +29,12 @@ jobs:
         run: |
           mvn clean package -Dskiptests
 
+      - name: Debug Print Directory Structure
+        run: |
+          echo "Current Directory: $(pwd)"
+          echo "Listing files:"
+          ls -R
+
       - name: Verify Target Directory Exists
         run: |
           if [ ! -d "target" ]; then
