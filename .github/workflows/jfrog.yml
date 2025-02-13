@@ -26,17 +26,22 @@ jobs:
         which jfrog || { echo "JFrog CLI not found in PATH!"; exit 1; }
         jfrog --version
         
-    - name: Configure JFrog CLI using secrets User and Password
-      run:  |
-        jfrog config add my-jfrog \
-            --artifactory-url=${{ secrets.JFROG_URL }}/artifactory \
-            --user=${{ secrets.JFROG_USER }} \
-            --password=${{ secrets.JFROG_PASSWORD }} \
-            --interactive=false
-
-    - name: Authenticate with JFrog (using API Token)
+    - name: Configure JFrog CLI
+      env:
+        JFROG_URL: ${{ secrets.JFROG_URL }}
+        JFROG_USER: ${{ secrets.JFROG_USER }}
+        JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
+        JFROG_TOKEN: ${{ secrets.JFROG_TOKEN }}
       run: |
-        jfrog config edit my-jfrog --access-token=${{ secrets.JFROG_TOKEN }} 
+        if [[ -n "$JFROG_TOKEN" ]]; then
+          jfrog config add my-jfrog --artifactory-url="$JFROG_URL" --access-token="$JFROG_TOKEN" --interactive=false
+        else
+          jfrog config add my-jfrog --artifactory-url="$JFROG_URL" --user="$JFROG_USER" --password="$JFROG_PASSWORD" --interactive=false
+        fi
+
+    - name: Verify JFrog Configuration
+      run: |
+        jfrog config show my-jfrog
 
     - name: Upload Artifact to JFrog Artifactory
       run: jfrog rt upload "target/*.jar" "petfrog-repo/*.jar" --build-name=petapp-build --build-number=${{ github.run_number }}
