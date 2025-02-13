@@ -16,17 +16,10 @@ jobs:
 
     - name: Install JFrog CLI
       run: |
-        curl -fL https://install-cli.jfrog.io | sh
-        JFROG_PATH=$(find $HOME -type f -name "jfrog" 2>/dev/null | head -n 1)
-
-        if [[ -z "$JFROG_PATH" ]]; then
-          echo "Error: JFrog CLI installation failed. Binary not found."
-          exit 1
-        fi
-
-        sudo mv "$JFROG_PATH" /usr/local/bin/jfrog
-        sudo chmod +x /usr/local/bin/jfrog
-        echo "JFrog CLI successfully installed."
+        curl -fL https://releases.jfrog.io/artifactory/jfrog-cli/v2/jf/jfrog-cli-linux-amd64/jfrog -o jfrog
+        chmod +x jfrog
+        sudo mv jfrog /usr/local/bin/jfrog
+        echo "JFrog CLI installed successfully."
 
     - name: Verify JFrog CLI Installation
       run: |
