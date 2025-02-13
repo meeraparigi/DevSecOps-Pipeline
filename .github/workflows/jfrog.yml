@@ -12,21 +12,27 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Set up JFrog CLI
-      run:  |
+    - name: Install JFrog CLI
+      run: |
         curl -fL https://install-cli.jfrog.io | sh
-          jf --version
-          jf c add artifactory-server \
-            --url=${{ secrets.JFROG_URL }} \
+        echo "$HOME/.jfrog" >> $GITHUB_PATH
+
+    - name: Configure JFrog CLI using secrets User and Password
+      run:  |
+        jfrog config add my-jfrog \
+            --artifactory-url=${{ secrets.JFROG_URL }}/artifactory \
             --user=${{ secrets.JFROG_USER }} \
             --password=${{ secrets.JFROG_PASSWORD }} \
             --interactive=false
 
+    - name: Authenticate with JFrog (using API Token)
+      run: |
+        jfrog config edit my-jfrog --access-token=${{ secrets.JFROG_TOKEN }} 
+
     - name: Upload Artifact to JFrog Artifactory
-      run: jf rt u "target/*.jar" "petfrog-repo/" --build-name=petapp-build --build-number=${{ github.run_number }}
+      run: jf rt u "target/*.jar" "petfrog-repo/*.jar" --build-name=petapp-build --build-number=${{ github.run_number }}
 
     - name: Publish Build Info
       run: jf rt bp petapp-build ${{ github.run_number }}
-
