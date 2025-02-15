@@ -12,7 +12,7 @@ jobs:
 
     steps:
 
-    - name: Debug: Check Workspace and Target Folder
+    - name: Check Workspace and Target Folder
       run: |
         echo "Current Directory: $(pwd)"
         echo "Listing files in workspace:"
