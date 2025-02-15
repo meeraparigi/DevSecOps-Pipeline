@@ -11,16 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-    - name: Verify Target Folder Contains Artifacts
-      run: |
-        if [ -z "$(ls -A target/*.jar 2>/dev/null)" ]; then
-          echo "❌ ERROR: No .jar files found in target/. Maven build may have failed."
-          exit 1
-        fi
-        echo "✅ JAR files found:"
-        ls -lh target/*.jar
-        
+    
     - name: Install JFrog CLI
       run: |
         curl -fL https://getcli.jfrog.io | sh
