@@ -11,9 +11,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
 
+     - name: Debug: Check Workspace and Target Folder
+      run: |
+        echo "Current Directory: $(pwd)"
+        echo "Listing files in workspace:"
+        ls -R
+        if [ ! -d "target" ]; then
+          echo "❌ ERROR: target directory does not exist! Maven build likely failed."
+          exit 1
+        fi
+
+    - name: Verify Target Folder Contains Artifacts
+      run: |
+        if [ -z "$(ls -A target/*.jar 2>/dev/null)" ]; then
+          echo "❌ ERROR: No .jar files found in target/. Maven build may have failed."
+          exit 1
+        fi
+        echo "✅ JAR files found:"
+        ls -lh target/*.jar
+        
     - name: Install JFrog CLI
       run: |
         curl -fL https://getcli.jfrog.io | sh
