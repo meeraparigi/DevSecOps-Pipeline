@@ -42,7 +42,7 @@ jobs:
         jfrog config show my-jfrog
 
     - name: Upload Artifact to JFrog Artifactory
-      run: jfrog rt upload "target/*.jar" "petfrog-repo/" --build-name=petapp-build --build-number=${{ github.run_number }}
+      run: jfrog rt upload "/target/*.jar" "petfrog-repo/" --build-name=petapp-build --build-number=${{ github.run_number }}
 
     - name: Publish Build Info
       run: jfrog rt bp petapp-build ${{ github.run_number }}
