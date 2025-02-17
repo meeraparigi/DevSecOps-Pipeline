@@ -8,7 +8,7 @@ on:
 
 jobs:
   upload-artifact:
-    runs-on: java-build
+    runs-on: ubuntu-latest
 
     steps:
         
