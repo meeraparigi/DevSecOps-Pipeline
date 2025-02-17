@@ -19,14 +19,9 @@ jobs:
     needs: build
     secrets: inherit
     
-  jfrog:
-    uses: ./.github/workflows/jfrog.yml
-    needs: sonar
-    secrets: inherit
-
   test:
     uses: ./.github/workflows/test.yml
-    needs: jfrog
+    needs: sonar
     secrets: inherit
     
   imagepush:
