@@ -25,13 +25,12 @@ jobs:
         jfrog --version
         
     - name: Configure JFrog CLI
+      uses: jfrog/setup-jfrog-cli@v4.5.6
+      with:
+        version: latest
       env:
         JFROG_URL: ${{ secrets.JFROG_URL }}
-        JFROG_USER: ${{ secrets.JFROG_USER }}
-        JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
         JFROG_TOKEN: ${{ secrets.JFROG_TOKEN }}
-      run: |
-        jfrog config add my-jfrog-new1 --artifactory-url="$JFROG_URL" --access-token="$JFROG_TOKEN" --interactive=false
        
     - name: Verify JFrog Configuration
       run: |
