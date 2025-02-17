@@ -31,14 +31,16 @@ jobs:
         JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
         JFROG_TOKEN: ${{ secrets.JFROG_TOKEN }}
       run: |
-        jfrog config add my-jfrog-new --artifactory-url="$JFROG_URL" --access-token="$JFROG_TOKEN" --interactive=false
+        jfrog config add my-jfrog-new1 --artifactory-url="$JFROG_URL" --access-token="$JFROG_TOKEN" --interactive=false
        
     - name: Verify JFrog Configuration
       run: |
-        jfrog config show my-jfrog-new
+        jfrog config show my-jfrog-new1
 
     - name: Upload Artifact to JFrog Artifactory
-      run: jfrog rt upload "/target/*.jar" "petfrog-repo/" --build-name=petapp-build --build-number=${{ github.run_number }}
+      run: |
+        jfrog rt upload "/target/*.jar" "petfrog-repo/" --build-name=petapp-build --build-number=${{ github.run_number }}
 
     - name: Publish Build Info
-      run: jfrog rt bp petapp-build ${{ github.run_number }}
+      run: |
+        jfrog rt bp petapp-build ${{ github.run_number }}
