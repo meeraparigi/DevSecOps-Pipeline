@@ -1,4 +1,4 @@
-# This is the CI Pipeline to be triggered on github hosted runner
+# This is the CI Pipeline to be triggered on self-hosted runner
 name: CI Pipeline
 on:
   push:
