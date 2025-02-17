@@ -22,11 +22,11 @@ jobs:
        
     - name: Verify JFrog Configuration
       run: |
-        jfrog config show my-jfrog-new1
+        jfrog config show my-jfrog-new2
 
     - name: Upload Artifact to JFrog Artifactory
       run: |
-        jfrog rt upload "target/*.jar" "petfrog-repo/" --build-name=petapp-build --build-number=${{ github.run_number }}
+        jfrog rt upload "target/my-artifact.jar" "petfrog-repo/" --build-name=petapp-build --build-number=${{ github.run_number }}
 
     - name: Publish Build Info
       run: |
