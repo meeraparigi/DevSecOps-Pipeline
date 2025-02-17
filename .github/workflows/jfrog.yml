@@ -31,12 +31,8 @@ jobs:
         JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
         JFROG_TOKEN: ${{ secrets.JFROG_TOKEN }}
       run: |
-        if [[ -n "$JFROG_TOKEN" ]]; then
-          jfrog config add my-jfrog --artifactory-url="$JFROG_URL" --access-token="$JFROG_TOKEN" --interactive=false
-        else
-          jfrog config add my-jfrog --artifactory-url="$JFROG_URL" --user="$JFROG_USER" --password="$JFROG_PASSWORD" --interactive=false
-        fi
-
+        jfrog config add my-jfrog --artifactory-url="$JFROG_URL" --access-token="$JFROG_TOKEN" --interactive=false
+       
     - name: Verify JFrog Configuration
       run: |
         jfrog config show my-jfrog
