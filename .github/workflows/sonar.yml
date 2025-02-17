@@ -6,7 +6,7 @@ on:
 
 jobs:
   sonar:
-    runs-on: ubuntu-latest
+    runs-on: java-build
     # needs java build - ensure this runs after build is complete
     steps:
       - name: SonarCloud Scan
