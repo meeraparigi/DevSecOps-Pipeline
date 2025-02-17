@@ -11,18 +11,6 @@ jobs:
     runs-on: java-build
 
     steps:
-    
-    - name: Install JFrog CLI
-      run: |
-        curl -fL https://getcli.jfrog.io | sh
-        sudo mv jfrog /usr/local/bin/jfrog
-        chmod +x /usr/local/bin/jfrog
-        echo "JFrog CLI installed successfully."
-
-    - name: Verify JFrog CLI Installation
-      run: |
-        which jfrog || { echo "JFrog CLI not found in PATH!"; exit 1; }
-        jfrog --version
         
     - name: Configure JFrog CLI
       uses: jfrog/setup-jfrog-cli@v4.5.6
