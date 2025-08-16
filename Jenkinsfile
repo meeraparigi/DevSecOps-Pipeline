@@ -5,7 +5,7 @@ pipeline {
     stage('Msg') {
       steps {
         script {
-           hello('Hello! from the branch helm_argo')
+           hello('Hello! revisited branch helm_argo')
          } 
       }
     }
