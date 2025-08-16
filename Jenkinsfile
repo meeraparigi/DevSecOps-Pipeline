@@ -5,7 +5,7 @@ pipeline {
     stage('Msg') {
       steps {
         script {
-           hello('Hello! from the branch jfrog-test')
+           hello('Hello! are you scanning my branch jfrog-test?')
          } 
       }
     }
