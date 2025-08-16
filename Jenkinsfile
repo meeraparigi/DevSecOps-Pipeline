@@ -3,9 +3,11 @@ pipeline {
   agent any
   stages {
     stage('Msg') {
-     script {
-       hello('Hello! from the branch jfrog-test')
-     } 
+      steps {
+        script {
+           hello('Hello! from the branch jfrog-test')
+         } 
+      }
     }
   }
 }
