@@ -3,9 +3,11 @@ pipeline {
   agent any
   stages {
     stage('Msg') {
-     script {
-       hello('Hello! from the branch helm_argo')
-     } 
+      steps {
+        script {
+           hello('Hello! from the branch helm_argo')
+         } 
+      }
     }
   }
 }
